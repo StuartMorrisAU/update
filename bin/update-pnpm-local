@@ -1,9 +1,15 @@
 #!/bin/sh
 set -euf
 
+# script name
+updatepkg="[$(basename $0)]"
+updatepkg=${updatepkg^^}
+
 # PNPM: Performant Node Package Manager
 if command -v pnpm >/dev/null 2>&1; then
     if [ -r "package.json" ]; then
+        echo
+        echo "$updatepkg: Updating..."
         pnpm update
     fi
 fi

@@ -1,8 +1,16 @@
 #!/bin/sh
 set -euf
 
+# script name
+updatepkg="[$(basename $0)]"
+updatepkg=${updatepkg^^}
+
 # freebsd-update: FreeBSD system 
 if command -v freebsd-update >/dev/null 2>&1; then
+    echo
+    echo "$updatepkg: Fetching..."
 	freebsd-update fetch
+    echo
+    echo "$updatepkg: Installing..."
     freebsd-update install
 fi

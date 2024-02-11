@@ -1,8 +1,14 @@
 #!/bin/sh
 set -euf
 
+# script name
+updatepkg="[$(basename $0)]"
+updatepkg=${updatepkg^^}
+
 # Yay package manager for Arch Linux.
 #
 if command -v yay >/dev/null 2>&1; then
+    echo
+    echo "$updatepkg: Upgrading..."
     yay -Syu
 fi

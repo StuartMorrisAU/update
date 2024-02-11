@@ -1,7 +1,13 @@
 #!/bin/sh
 set -euf
 
+# script name
+updatepkg="[$(basename $0)]"
+updatepkg=${updatepkg^^}
+
 # prt-get package management tool for CRUX Linux. 
 if command -v prt-get >/dev/null 2>&1; then
-   prt-get sysup
+    echo
+    echo "$updatepkg: Updating..."
+    prt-get sysup
 fi

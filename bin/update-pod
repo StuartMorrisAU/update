@@ -1,7 +1,13 @@
 #!/bin/sh
 set -euf
 
+# script name
+updatepkg="[$(basename $0)]"
+updatepkg=${updatepkg^^}
+
 # Pod: Cocoapod package manager for macOS
 if command -v pod >/dev/null 2>&1; then
+    echo
+    echo "$updatepkg: Upgrading..."
     : #TODO
 fi

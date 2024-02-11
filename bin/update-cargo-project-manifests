@@ -1,6 +1,10 @@
 #!/bin/sh
 set -euf
 
+# script name
+updatepkg="[$(basename $0)]"
+updatepkg=${updatepkg^^}
+
 # Run update-cargo-project with manifests:
 #
 #     $XDG_CONFIG_HOME/update-git-pull-manifests/*

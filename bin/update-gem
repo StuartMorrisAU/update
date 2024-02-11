@@ -1,15 +1,27 @@
 #!/bin/sh
 set -euf
 
+# script name
+updatepkg="[$(basename $0)]"
+updatepkg=${updatepkg^^}
+
 # gem: Ruby package manager
 if command -v gem >/dev/null 2>&1; then
     dir=$(gem environment | sed -n 's/ * - INSTALLATION DIRECTORY: //p')
     if [ -w "$dir" ]; then
+        echo
+        echo "$updatepkg: Cleaning..."
         gem cleanup
+        echo
+        echo "$updatepkg: Installing package manager..."
         gem install rubygems-update
+        echo
+        echo "$updatepkg: Updating..."
         update_rubygems
         gem update --system
         yes | gem update
+        echo
+        echo "$updatepkg: Cleaning..."
         gem cleanup
     fi
 fi

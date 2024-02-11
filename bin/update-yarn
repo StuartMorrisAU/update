@@ -1,6 +1,10 @@
 #!/bin/sh
 set -euf
 
+# script name
+updatepkg="[$(basename $0)]"
+updatepkg=${updatepkg^^}
+
 # Yarn JavaScript package manager
 #
 # Upgrade packages to their latest version based on the specified range
@@ -8,6 +12,8 @@ set -euf
 #
 if command -v yarn >/dev/null 2>&1; then
     if [ -r "yarn.lock" ]; then
+        echo
+        echo "$updatepkg: Upgrading..."
         yarn upgrade
     fi
 fi

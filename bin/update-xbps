@@ -1,7 +1,13 @@
 #!/bin/sh
 set -euf
 
+# script name
+updatepkg="[$(basename $0)]"
+updatepkg=${updatepkg^^}
+
 # xbps to build packages for Void Linux.
 if command -v xbps >/dev/null 2>&1; then
+    echo
+    echo "$updatepkg: Installing..."
     xbps-install --sync
 fi

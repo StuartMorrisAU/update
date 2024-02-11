@@ -1,7 +1,13 @@
 #!/bin/sh
 set -euf
 
+# script name
+updatepkg="[$(basename $0)]"
+updatepkg=${updatepkg^^}
+
 # urpmi is the system package manager for Mageia Linux.
 if command -v urpmi.update >/dev/null 2>&1; then
-   urpmi.update -a
+    echo
+    echo "$updatepkg: Updating..."
+    urpmi.update -a
 fi

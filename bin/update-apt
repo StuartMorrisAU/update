@@ -1,6 +1,10 @@
 #!/bin/sh
 set -euf
 
+# script name
+updatepkg="[$(basename $0)]"
+updatepkg=${updatepkg^^}
+
 # Apt package manager for Debian Linux, Ubuntu Linux, etc.
 #
 # If you want the system to force saying yes, use this setting:
@@ -54,14 +58,24 @@ set -euf
 #   package conflict.
 #
 if command -v apt-get >/dev/null 2>&1; then
+    echo
+    echo "$updatepkg: Cleaning and removing..."
     apt-get --quiet --yes autoclean
     apt-get --quiet --yes --purge autoremove
+    echo
+    echo "$updatepkg: Updating sources..."
     apt-get --quiet --yes update
+    echo
+    echo "$updatepkg: Updating package manager..."
     apt-get --quiet --yes install update-manager
     apt-get --quiet --yes install update-manager-core
+    echo
+    echo "$updatepkg: Upgrading..."
     apt-get --quiet --yes upgrade --fix-broken --fix-missing
     apt-get --quiet --yes dist-upgrade --fix-broken --fix-missing
     apt-get --quiet --yes full-upgrade --fix-broken --fix-missing
+    echo
+    echo "$updatepkg: Cleaning and removing..."
     apt-get --quiet --yes autoclean
     apt-get --quiet --yes --purge autoremove
 fi

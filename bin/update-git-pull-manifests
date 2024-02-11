@@ -1,6 +1,10 @@
 #!/bin/sh
 set -euf
 
+# script name
+updatepkg="[$(basename $0)]"
+updatepkg=${updatepkg^^}
+
 # Run update-git-pull with manifests:
 #
 #     $XDG_CONFIG_HOME/update-git-pull-manifests/*
@@ -27,6 +31,8 @@ update_git_pull_manifests() {
 
 update_git_pull() {
     if command -v git >/dev/null 2>&1; then
+        echo
+        echo "$updatepkg: Pulling repositories..."
         git pull && 
         git submodule update --init --recursive
     fi

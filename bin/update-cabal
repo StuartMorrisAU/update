@@ -1,9 +1,15 @@
 #!/bin/sh
 set -euf
 
+# script name
+updatepkg="[$(basename $0)]"
+updatepkg=${updatepkg^^}
+
 # Cabal for Haskell
 if command -v cabal >/dev/null 2>&1; then
     if [ "$(whoami)" != "root" ]; then
+        echo
+        echo "$updatepkg: Updating..."
         cabal update
     fi
 fi

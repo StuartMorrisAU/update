@@ -1,7 +1,13 @@
 #!/bin/sh
 set -euf
 
+# script name
+updatepkg="[$(basename $0)]"
+updatepkg=${updatepkg^^}
+
 # Rust programming language update tool
 if command -v rustup >/dev/null 2>&1; then
+    echo
+    echo "$updatepkg: Updating..."
     rustup update
 fi

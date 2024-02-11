@@ -1,9 +1,19 @@
 #!/bin/sh
 set -euf
 
+# script name
+updatepkg="[$(basename $0)]"
+updatepkg=${updatepkg^^}
+
 # DNF package manager for Fedora Linux.
 if command -v dnf >/dev/null 2>&1; then
+    echo
+    echo "$updatepkg: Removing..."
     dnf --assumeyes autoremove
+    echo
+    echo "$updatepkg: Upgrading..."
     dnf --assumeyes upgrade --refresh
+    echo
+    echo "$updatepkg: Removing..."
     dnf --assumeyes autoremove
 fi

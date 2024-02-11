@@ -1,7 +1,13 @@
 #!/bin/sh
 set -euf
 
+# script name
+updatepkg="[$(basename $0)]"
+updatepkg=${updatepkg^^}
+
 # flatpak is used for software packages on many Linux systems.
 if command -v flatpak >/dev/null 2>&1; then
-   flatpak update
+    echo
+    echo "$updatepkg: Updating..."
+    flatpak update --assumeyes
 fi

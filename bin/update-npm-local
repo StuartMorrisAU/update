@@ -1,13 +1,23 @@
 #!/bin/sh
 set -euf
 
+# script name
+updatepkg="[$(basename $0)]"
+updatepkg=${updatepkg^^}
+
 # NPM: Node Package Manager
 if command -v npm >/dev/null 2>&1; then
+    echo
+    echo "$updatepkg: Installing..."
     npm install npm
+    echo
+    echo "$updatepkg: Updating..."
     npm update
     npm audit fix
 fi
 
 if npm list npm-check-updates >/dev/null 2>&1; then
+    echo
+    echo "$updatepkg: Upgrading..."
     npm exec npm-check-updates --upgrade
 fi

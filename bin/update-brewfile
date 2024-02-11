@@ -1,6 +1,10 @@
 #!/bin/sh
 set -euf
 
+# script name
+updatepkg="[$(basename $0)]"
+updatepkg=${updatepkg^^}
+
 # Update via Brewfile using the `brew` package manager.
 #
 # The brew documentation says to look for its file in order:
@@ -14,7 +18,9 @@ if command -v brew >/dev/null 2>&1; then
     if [ "$(whoami)" != "root" ]; then
         file=${HOMEBREW_BUNDLE_FILE:-${XDG_CONFIG_HOME:-$HOME/.config}/brewfile/Brewfile}
         if [ -r "$file" ]; then
-            ( brew bundle -file="$file" )
+            echo
+            echo "$updatepkg: Bundling..."
+            (brew bundle -file="$file")
         fi
     fi
 fi

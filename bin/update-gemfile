@@ -1,6 +1,10 @@
 #!/bin/sh
 set -euf
 
+# script name
+updatepkg="[$(basename $0)]"
+updatepkg=${updatepkg^^}
+
 # Update via Gemfile by using the `gem` package manager.
 #
 # Look for a Gemfile in this order:
@@ -12,6 +16,8 @@ set -euf
 if command -v gem >/dev/null 2>&1; then
     file=${GEMFILE:-${XDG_CONFIG_HOME:-$HOME/.config}/gem/Gemfile}
     if [ -r "$file" ]; then
+        echo
+        echo "$updatepkg: Installing..."
         (cd "$(dirname "$file")"; bundle install )
     fi
 fi

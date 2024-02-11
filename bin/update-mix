@@ -1,8 +1,14 @@
 #!/bin/sh
 set -euf
 
+# script name
+updatepkg="[$(basename $0)]"
+updatepkg=${updatepkg^^}
+
 # Mix for Elixir
 if command -v mix >/dev/null 2>&1; then
+    echo
+    echo "$updatepkg: Upgrading..."
     mix local.hex --force
     mix local.rebar --force
 fi

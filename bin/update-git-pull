@@ -1,6 +1,10 @@
 #!/bin/sh
 set -euf
 
+# script name
+updatepkg="[$(basename $0)]"
+updatepkg=${updatepkg^^}
+
 # Example code to find each .git and update its project:
 #
 #     find "$HOME" -type d -name '.git' -exec dirname {} \; | 
@@ -11,6 +15,8 @@ set -euf
 
 update_git_pull() {
     if command -v git >/dev/null 2>&1; then
+        echo
+        echo "$updatepkg: Pulling repository..."
         git pull && 
         git submodule update --init --recursive
     fi

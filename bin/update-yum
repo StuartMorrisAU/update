@@ -1,13 +1,24 @@
 #!/bin/sh
 set -euf
 
+# script name
+updatepkg="[$(basename $0)]"
+updatepkg=${updatepkg^^}
+
 # Yum package manager for RedHat Linux, Fedora Linux, CentOS Linux, etc.
 # Only run yum if dnf is not installed as dnf is now the default for Fedora.
 if command -v yum >/dev/null 2>&1 && ! command -v dnf >/dev/null 2>&1; then
+    echo
+    echo "$updatepkg: Cleaning..."
     yum --assumeyes clean all
+    echo
+    echo "$updatepkg: Upgrading..."
     yum --assumeyes --obsolete update
+    echo
+    echo "$updatepkg: Cleaning..."
     yum --assumeyes clean all
 elif command -v yum >/dev/null 2>&1 && command -v dnf >/dev/null 2>&1; then
     echo
-    echo "YUM: dnf is installed, so that ran instead of yum."
+    echo
+    echo "$updatepkg: dnf is installed, so that ran instead of yum."
 fi

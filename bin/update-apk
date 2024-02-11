@@ -1,7 +1,13 @@
 #!/bin/sh
 set -euf
 
+# script name
+updatepkg="[$(basename $0)]"
+updatepkg=${updatepkg^^}
+
 # Alpine Package Keeper (apk) for Alpine Linux.
 if command -v apk >/dev/null 2>&1; then
-   apk upgrade
+    echo
+    echo "$updatepkg: Upgrading..."
+    apk upgrade
 fi

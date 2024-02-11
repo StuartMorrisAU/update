@@ -1,7 +1,13 @@
 #!/bin/sh
 set -euf
 
+# script name
+updatepkg="[$(basename $0)]"
+updatepkg=${updatepkg^^}
+
 # emerge is used for software packages on Gentoo Linux.
 if command -v emerge >/dev/null 2>&1; then
-   emerge -vuDN @world
+    echo
+    echo "$updatepkg: Upgrading..."
+    emerge -vuDN @world
 fi

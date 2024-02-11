@@ -1,15 +1,29 @@
 #!/bin/sh
 set -euf
 
+# script name
+updatepkg="[$(basename $0)]"
+updatepkg=${updatepkg^^}
+
 # NPM: Node Package Manager
 if command -v npm >/dev/null 2>&1; then
+    echo
+    echo "$updatepkg: Installing globally..."
     npm install -g npm
+    echo
+    echo "$updatepkg: Updating globally..."
     npm update -g
     # Via local
+    echo
+    echo "$updatepkg: Installing locally..."
     npm install npm
+    echo
+    echo "$updatepkg: Updating locally..."
     npm update
     # Via manager
     if command -v n >/dev/null 2>&1; then
+        echo
+        echo "$updatepkg: Updating via manager..."
         n stable
         npm update -g
         npm update

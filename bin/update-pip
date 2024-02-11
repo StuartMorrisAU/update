@@ -1,6 +1,10 @@
 #!/bin/sh
 set -euf
 
+# script name
+updatepkg="[$(basename $0)]"
+updatepkg=${updatepkg^^}
+
 # pip: Python package installer
 #
 # From the pip documentation: WARNING: Running pip as the 'root' user can result
@@ -11,6 +15,8 @@ set -euf
 for python in "python" "python3"; do
     if command -v "$python" >/dev/null 2>&1; then    
         if [ "$(whoami)" != "root" ]; then
+            echo
+            echo "$updatepkg: Updating python..."
             $python -m pip install --upgrade pip
             $python -m pip install --upgrade setuptools
         fi
@@ -19,6 +25,8 @@ done
 for pip in "pip" "pip3"; do
     if [ "$(whoami)" != "root" ]; then
         if command -v "$pip" >/dev/null 2>&1; then    
+            echo
+            echo "$updatepkg: Updating pip..."
             $pip install --upgrade pip
             $pip install --upgrade setuptools
             $pip freeze --local | sed -n 's/==.*//p' | xargs -n1 -I{} $pip install --upgrade "{}"

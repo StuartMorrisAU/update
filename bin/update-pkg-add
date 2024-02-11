@@ -1,7 +1,13 @@
 #!/bin/sh
 set -euf
 
+# script name
+updatepkg="[$(basename $0)]"
+updatepkg=${updatepkg^^}
+
 # pkg_add for NetBSD, OpenBSD
 if command -v pkg_add >/dev/null 2>&1; then
+    echo
+    echo "$updatepkg: Upgrading..."
     pkg_add -u
 fi

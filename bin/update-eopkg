@@ -1,7 +1,13 @@
 #!/bin/sh
 set -euf
 
+# script name
+updatepkg="[$(basename $0)]"
+updatepkg=${updatepkg^^}
+
 # eopkg is for software packages on Solus Linux.
 if command -v eopkg >/dev/null 2>&1; then
-   eopkg upgrade
+    echo
+    echo "$updatepkg: Upgrading..."
+    eopkg upgrade
 fi

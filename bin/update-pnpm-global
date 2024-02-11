@@ -1,6 +1,10 @@
 #!/bin/sh
 set -euf
 
+# script name
+updatepkg="[$(basename $0)]"
+updatepkg=${updatepkg^^}
+
 # PNPM: Performant Node Package Manager
 #
 if command -v pnpm >/dev/null 2>&1; then
@@ -14,6 +18,8 @@ if command -v pnpm >/dev/null 2>&1; then
     #     No package.json found in /var/root/Library/pnpm/global/5
     #
     set +e
+    echo
+    echo "$updatepkg: Updating..."
     pnpm update --global
     set -e
 fi

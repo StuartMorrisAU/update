@@ -1,6 +1,10 @@
 #!/bin/sh
 set -euf
 
+# script name
+updatepkg="[$(basename $0)]"
+updatepkg=${updatepkg^^}
+
 # Example code to find each cargo project and update it:
 #
 #     find "$HOME" -type f -name 'Cargo.toml' -exec dirname {} \; | 
@@ -14,18 +18,26 @@ update_cargo_project() {
     if command -v cargo >/dev/null 2>&1; then
         # Is this command running inside a cargo project?
         if cargo check>/dev/null 2>&1; then 
+            echo
+            echo "$updatepkg: Updating..."
             cargo update --aggressive
+            echo
+            echo "$updatepkg: Checking, building, and testing..."
             cargo check --all-targets
             cargo build --all-targets
             cargo test --all-targets --no-run
             # Is "cargo upgrade" available?
             # If yes, then upgrade the Cargo.toml file.
             if cargo upgrade --help>/dev/null 2>&1; then
+                echo
+                echo "$updatepkg: Upgrading..."
                 cargo upgrade --recursive true
             fi
         fi
         # Delete old build artifacts
         if cargo --list | grep -q '^ *sweep$'; then 
+            echo
+            echo "$updatepkg: Sweeping..."
             cargo sweep --installed
         fi
     fi

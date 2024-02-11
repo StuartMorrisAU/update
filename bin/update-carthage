@@ -1,9 +1,15 @@
 #!/bin/sh
 set -euf
 
+# script name
+updatepkg="[$(basename $0)]"
+updatepkg=${updatepkg^^}
+
 # Carthage: iOS dependency manager
 if command -v carthage >/dev/null 2>&1; then
     if [ -e ./Cartfile ] ; then
+        echo
+        echo "$updatepkg: Updating..."
         carthage update
     fi
 fi

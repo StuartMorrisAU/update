@@ -1,7 +1,13 @@
 #!/bin/sh
 set -euf
 
+# script name
+updatepkg="[$(basename $0)]"
+updatepkg=${updatepkg^^}
+
 # pkg package manager for FreeBSD
 if command -v pkg >/dev/null 2>&1; then
-  pkg update
+    echo
+    echo "$updatepkg: Updating..."
+    pkg update
 fi

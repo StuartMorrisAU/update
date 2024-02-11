@@ -1,6 +1,10 @@
 #!/bin/sh
 set -euf
 
+# script name
+updatepkg="[$(basename $0)]"
+updatepkg=${updatepkg^^}
+
 # Swift progrsmming language
 
 expect_version="3.0.2"
@@ -16,6 +20,8 @@ swift_version(){
 if command -v xcrun >/dev/null 2>&1; then
     actual_version=$(swift_version)
     if [ "$expect_version" != "$actual_version" ]; then
+        echo
+        echo "$updatepkg: Updating..."
         echo "Update Swift: expect:$expect_version, actual:$actual_version"
     fi
 fi

@@ -1,7 +1,13 @@
 #!/bin/sh
 set -euf
 
+# script name
+updatepkg="[$(basename $0)]"
+updatepkg=${updatepkg^^}
+
 # RubyMotion: requires up-to-date license
 if command -v motion >/dev/null 2>&1; then
+    echo
+    echo "$updatepkg: Updating..."
     motion update
 fi

@@ -1,6 +1,10 @@
 #!/bin/sh
 set -euf
 
+# script name
+updatepkg="[$(basename $0)]"
+updatepkg=${updatepkg^^}
+
 # Update via Podfile by using the `pod` package manager.
 #
 # Look for a Podfile file in this order:
@@ -12,6 +16,8 @@ set -euf
 if command -v pod >/dev/null 2>&1; then
     file=${PODFILE:-${XDG_CONFIG_HOME:-$HOME/.config}/pod/Podfile}
     if [ -r "$file" ]; then
+        echo
+        echo "$updatepkg: Updating..."
         ( cd "$(dirname "$file")"; pod update )
     fi
 fi

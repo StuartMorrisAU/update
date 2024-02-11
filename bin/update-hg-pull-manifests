@@ -1,6 +1,10 @@
 #!/bin/sh
 set -euf
 
+# script name
+updatepkg="[$(basename $0)]"
+updatepkg=${updatepkg^^}
+
 # Run update-hg-pull with manifests:
 #
 #     $XDG_CONFIG_HOME/update-hg-pull-manifests/*
@@ -27,6 +31,8 @@ update_hg_pull_manifests() {
 
 update_hg_pull() {
     if command -v hg >/dev/null 2>&1; then
+        echo
+        echo "$updatepkg: Pulling project..."
         hg pull -u
     fi
 }

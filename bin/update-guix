@@ -1,7 +1,13 @@
 #!/bin/sh
 set -euf
 
+# script name
+updatepkg="[$(basename $0)]"
+updatepkg=${updatepkg^^}
+
 # Guix is for software packages on Guix System Linux.
 if command -v guix >/dev/null 2>&1; then
-   guix upgrade
+    echo
+    echo "$updatepkg: Upgrading..."
+    guix upgrade
 fi

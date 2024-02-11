@@ -1,7 +1,13 @@
 #!/bin/sh
 set -euf
 
+# script name
+updatepkg="[$(basename $0)]"
+updatepkg=${updatepkg^^}
+
 # Oh My Zsh
 if command -v upgrade_oh_my_zsh >/dev/null 2>&1; then
+    echo
+    echo "$updatepkg: Upgrading..."
     upgrade_oh_my_zsh
 fi

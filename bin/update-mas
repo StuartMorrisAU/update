@@ -1,7 +1,13 @@
 #!/bin/sh
 set -euf
 
+# script name
+updatepkg="[$(basename $0)]"
+updatepkg=${updatepkg^^}
+
 # mas: Mac App Store command line interface
 if command -v mas >/dev/null 2>&1; then
+    echo
+    echo "$updatepkg: Upgrading..."
     mas upgrade
 fi

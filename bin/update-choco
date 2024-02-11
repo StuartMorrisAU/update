@@ -1,7 +1,13 @@
 #!/bin/sh
 set -euf
 
+# script name
+updatepkg="[$(basename $0)]"
+updatepkg=${updatepkg^^}
+
 # Choco package manager for Windows
 if command -v choco >/dev/null 2>&1; then
-   choco upgrade all
+    echo
+    echo "$updatepkg: Upgrading..."
+    choco upgrade all
 fi

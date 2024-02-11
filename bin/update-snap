@@ -1,8 +1,14 @@
 #!/bin/sh
 set -euf
 
+# script name
+updatepkg="[$(basename $0)]"
+updatepkg=${updatepkg^^}
+
 # snap is used for software packages on many Linux systems.
 if command -v snap >/dev/null 2>&1; then
-   snap list
-   snap refresh
+    echo
+    echo "$updatepkg: Refreshing..."
+    snap list
+    snap refresh
 fi

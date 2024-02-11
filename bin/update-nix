@@ -1,7 +1,13 @@
 #!/bin/sh
 set -euf
 
+# script name
+updatepkg="[$(basename $0)]"
+updatepkg=${updatepkg^^}
+
 # Nix is for cross-platform software packages and NixOS
 if command -v nix-env >/dev/null 2>&1; then
-   nix-env --upgrade
+    echo
+    echo "$updatepkg: Upgrading..."
+    nix-env --upgrade
 fi

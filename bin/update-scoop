@@ -1,7 +1,13 @@
 #!/bin/sh
 set -euf
 
+# script name
+updatepkg="[$(basename $0)]"
+updatepkg=${updatepkg^^}
+
 # Scoop package manager for Windows
 if command -v scoop >/dev/null 2>&1; then
-   scoop update
+    echo
+    echo "$updatepkg: Updating..."
+    scoop update
 fi

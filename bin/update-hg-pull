@@ -1,6 +1,10 @@
 #!/bin/sh
 set -euf
 
+# script name
+updatepkg="[$(basename $0)]"
+updatepkg=${updatepkg^^}
+
 # Example code to find each .hg and update its project:
 #
 #     find "$HOME" -type d -name '.hg' -exec dirname {} \; | 
@@ -11,6 +15,8 @@ set -euf
 
 update_hg_pull() {
     if command -v hg >/dev/null 2>&1; then
+        echo
+        echo "$updatepkg: Pulling project..."
         hg pull -u
     fi
 }

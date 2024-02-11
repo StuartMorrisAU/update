@@ -1,7 +1,13 @@
 #!/bin/sh
 set -euf
 
+# script name
+updatepkg="[$(basename $0)]"
+updatepkg=${updatepkg^^}
+
 # Zypper package manager for openSUSE
 if command -v zypper >/dev/null 2>&1; then
+    echo
+    echo "$updatepkg: Updating..."
     zypper up
 fi
