@@ -4,6 +4,6 @@ set -euf
 # DNF package manager for Fedora Linux.
 if command -v dnf >/dev/null 2>&1; then
     dnf --assumeyes autoremove
-    dnf --assumeyes upgrade
+    dnf --assumeyes upgrade --refresh
     dnf --assumeyes autoremove
 fi
