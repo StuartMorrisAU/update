@@ -1,0 +1,8 @@
+#!/bin/sh
+set -euf
+
+# snap is used for software packages on many Linux systems.
+if command -v snap >/dev/null 2>&1; then
+   snap list
+   snap refresh
+fi
