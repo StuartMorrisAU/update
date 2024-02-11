@@ -90,22 +90,22 @@ if [ "$#" -eq 1 ]; then
       help; exit 0
       ;;
     -v|--version)
-      out "$program_version"; exit 0
+      echo "$program_version"; exit 0
       ;;
     --program-command)
-      out "$program_command"; exit 0
+      echo "$program_command"; exit 0
       ;;
     --program-version)
-      out "$program_version"; exit 0
+      echo "$program_version"; exit 0
       ;;
     --program-updated)
-      out "$program_version"; exit 0
+      echo "$program_updated"; exit 0
       ;;
     --program-license)
-      out "$program_license"; exit 0
+      echo "$program_license"; exit 0
       ;;
     --program-contact)
-      out "$program_contact"; exit 0
+      echo "$program_contact"; exit 0
       ;;
     --*=*)
       key="${1#--}"; key="${key%%=*}";
@@ -115,64 +115,71 @@ if [ "$#" -eq 1 ]; then
   esac
 fi
 
+# ensure script runs as root
+if [[ $EUID -ne 0 ]]; then
+  echo $program_command must be run as root.
+  exit 0
+fi
+
 ## Update operating system
-. update-ubuntu-release || :
-. update-macos || :
+. ./update-ubuntu-release || :
+. ./update-macos || :
 
 ## Update via system-wide package managers
-. update-apk || :
-. update-apt || :
-. update-brew || :
-. update-brewfile || :
-. update-cards || :
-. update-choco || :
-. update-dnf || :
-. update-emerge || :
-. update-eopkg || :
-. update-freebsd || :
-. update-guix || :
-. update-mas || :
-. update-nix || :
-. update-pacman || :
-. update-opkg || :
-. update-pkg || :
-. update-pkg-add || :
-. update-prt-get || :
-. update-scoop || :
-. update-slackpkg || :
-. update-urpmi || :
-. update-xbps || :
-. update-yay || :
-. update-yum || :
-. update-zypper || :
+. ./update-apk || :
+. ./update-apt || :
+. ./update-brew || :
+. ./update-brewfile || :
+. ./update-cards || :
+. ./update-choco || :
+. ./update-dnf || :
+. ./update-emerge || :
+. ./update-eopkg || :
+. ./update-freebsd || :
+. ./update-guix || :
+. ./update-mas || :
+. ./update-nix || :
+. ./update-pacman || :
+. ./update-opkg || :
+. ./update-pkg || :
+. ./update-pkg-add || :
+. ./update-prt-get || :
+. ./update-scoop || :
+. ./update-slackpkg || :
+. ./update-snap || :
+. ./update-urpmi || :
+. ./update-xbps || :
+. ./update-yay || :
+. ./update-yum || :
+. ./update-zypper || :
 
 # Update system shells
-. update-oh-my-zsh || :
+. ./update-oh-my-zsh || :
 
 # Update system languages
-. update-rustup || :
+. ./update-rustup || :
 
 # Update via tool-specific package managers
-. update-apm || :
-. update-asdf || :
-. update-cabal || :
-. update-cargo || :
-. update-cargo-project || :
-. update-cargo-project-manifests || :
-. update-gem || :
-. update-gemfile || :
-. update-mix || :
-. update-motion || :
-. update-pip || :
-. update-pod || :
-. update-podfile || :
-. update-npm-global || :
-. update-npm-local || :
-. update-npm-n-stable || :
-. update-pnpm-global || :
-. update-pnpm-local || :
-. update-yarn || :
+. ./update-apm || :
+. ./update-asdf || :
+. ./update-cabal || :
+. ./update-cargo || :
+. ./update-cargo-project || :
+. ./update-cargo-project-manifests || :
+. ./update-gem || :
+. ./update-gemfile || :
+. ./update-mix || :
+. ./update-motion || :
+. ./update-pip || :
+. ./update-pod || :
+. ./update-podfile || :
+#. ./update-npm-global || :
+#. ./update-npm-local || :
+#. ./update-npm-n-stable || :
+. ./update-pnpm-global || :
+. ./update-pnpm-local || :
+. ./update-yarn || :
 
 # Update repositories
-. update-hg-pull || :
-. update-git-pull || :
+. ./update-hg-pull || :
+. ./update-git-pull || :
