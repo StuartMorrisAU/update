@@ -7,7 +7,7 @@ program_command="update"
 program_version="8.0.0"
 program_updated="2023-12-28T22:26:48Z"
 program_license="GPL-2.0-or-later or contact us for custom"
-program_contact="Joel Parker Henderson (https://joelparkerhenderson.com)"
+program_contact="Joel Parker Henderson (https:/joelparkerhenderson.com)"
 
 ## Help Function
 
@@ -115,49 +115,53 @@ if [ "$#" -eq 1 ]; then
   esac
 fi
 
-# ensure script runs as root
-if [[ $EUID -ne 0 ]]; then
-  echo $program_command must be run as root.
+## Ensure script does not run as root
+if [[ $EUID -eq 0 ]]; then
+  echo "Do not run $program_command as root. Individual package managers will request escalation if necessary."
   exit 0
 fi
 
+## Working directory
+SCRIPT_FULLPATH=`readlink -f "${BASH_SOURCE:-$0}"`
+SCRIPT_PATH=`dirname $SCRIPT_FULLPATH`
+
 ## Update operating system
-. ./update-ubuntu-release || :
-. ./update-macos || :
+sudo su -c "$SCRIPT_PATH/update-ubuntu-release || :"
+sudo su -c "$SCRIPT_PATH/update-macos || :"
 
 ## Update via system-wide package managers
-. ./update-apk || :
-. ./update-apt || :
+sudo su -c "$SCRIPT_PATH/update-apk || :"
+sudo su -c "$SCRIPT_PATH/update-apt || :"
 . ./update-brew || :
 . ./update-brewfile || :
-. ./update-cards || :
-. ./update-choco || :
-. ./update-dnf || :
-. ./update-emerge || :
-. ./update-eopkg || :
-. ./update-freebsd || :
-. ./update-guix || :
-. ./update-mas || :
-. ./update-nix || :
-. ./update-pacman || :
-. ./update-opkg || :
-. ./update-pkg || :
-. ./update-pkg-add || :
-. ./update-prt-get || :
-. ./update-scoop || :
-. ./update-slackpkg || :
-. ./update-snap || :
-. ./update-urpmi || :
-. ./update-xbps || :
-. ./update-yay || :
-. ./update-yum || :
-. ./update-zypper || :
+sudo su -c "$SCRIPT_PATH/update-cards || :"
+sudo su -c "$SCRIPT_PATH/update-choco || :"
+sudo su -c "$SCRIPT_PATH/update-dnf || :"
+sudo su -c "$SCRIPT_PATH/update-emerge || :"
+sudo su -c "$SCRIPT_PATH/update-eopkg || :"
+sudo su -c "$SCRIPT_PATH/update-freebsd || :"
+sudo su -c "$SCRIPT_PATH/update-guix || :"
+sudo su -c "$SCRIPT_PATH/update-mas || :"
+sudo su -c "$SCRIPT_PATH/update-nix || :"
+sudo su -c "$SCRIPT_PATH/update-pacman || :"
+sudo su -c "$SCRIPT_PATH/update-opkg || :"
+sudo su -c "$SCRIPT_PATH/update-pkg || :"
+sudo su -c "$SCRIPT_PATH/update-pkg-add || :"
+sudo su -c "$SCRIPT_PATH/update-prt-get || :"
+sudo su -c "$SCRIPT_PATH/update-scoop || :"
+sudo su -c "$SCRIPT_PATH/update-slackpkg || :"
+sudo su -c "$SCRIPT_PATH/update-snap || :"
+sudo su -c "$SCRIPT_PATH/update-urpmi || :"
+sudo su -c "$SCRIPT_PATH/update-xbps || :"
+sudo su -c "$SCRIPT_PATH/update-yay || :"
+sudo su -c "$SCRIPT_PATH/update-yum || :"
+sudo su -c "$SCRIPT_PATH/update-zypper || :"
 
 # Update system shells
-. ./update-oh-my-zsh || :
+sudo su -c "$SCRIPT_PATH/update-oh-my-zsh || :"
 
 # Update system languages
-. ./update-rustup || :
+sudo su -c "$SCRIPT_PATH/update-rustup || :"
 
 # Update via tool-specific package managers
 . ./update-apm || :
