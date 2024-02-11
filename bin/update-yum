@@ -2,8 +2,12 @@
 set -euf
 
 # Yum package manager for RedHat Linux, Fedora Linux, CentOS Linux, etc.
-if command -v yum >/dev/null 2>&1; then
-    yum --assumeyes clean
+# Only run yum if dnf is not installed as dnf is now the default for Fedora.
+if command -v yum >/dev/null 2>&1 && ! command -v dnf >/dev/null 2>&1; then
+    yum --assumeyes clean all
     yum --assumeyes --obsolete update
-    yum --assumeyes clean
+    yum --assumeyes clean all
+elif command -v yum >/dev/null 2>&1 && command -v dnf >/dev/null 2>&1; then
+    echo
+    echo "YUM: dnf is installed, so that ran instead of yum."
 fi
